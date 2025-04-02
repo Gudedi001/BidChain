@@ -1,4 +1,4 @@
-# EasySwap Hardhat Project
+# BidChain Hardhat Project
 
 ## Prerequisites
 
