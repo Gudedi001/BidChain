@@ -8,10 +8,6 @@ const { recoverTypedSignature_v4 } = require("eth-sig-util");
 
 let owner, minter, bidder, addrs, addr3
 let assetStorage, nftAuction, auction
-const AddressZero = "0x0000000000000000000000000000000000000000";
-const Byte32Zero = "0x0000000000000000000000000000000000000000000000000000000000000000";
-// const Uint128Max = toBn("340282366920938463463.374607431768211455");
-// const Uint256Max = toBn("115792089237316195423570985008687907853269984665640564039457.584007913129639935");
 
 
 describe("BidChain Test", function () {

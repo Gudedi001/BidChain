@@ -9,19 +9,25 @@ const { config: dotenvConfig } = require("dotenv")
 const { resolve } = require("path")
 dotenvConfig({ path: resolve(__dirname, "./.env") })
 
-const SEPOLIA_PK_ONE = process.env.SEPOLIA_PK_ONE
-const SEPOLIA_PK_TWO = process.env.SEPOLIA_PK_TWO
-// if (!SEPOLIA_PK_ONE) {
-//   throw new Error("Please set at least one private key in a .env file")
-// }
+const SEPOLIA_ARBITRUM_PK = process.env.SEPOLIA_ARBITRUM_PK
+if (!SEPOLIA_ARBITRUM_PK) {
+  throw new Error("Please set at least one private key in a .env file")
+}
 
-const MAINNET_PK = process.env.MAINNET_PK
-const MAINNET_ALCHEMY_AK = process.env.MAINNET_ALCHEMY_AK
+const SEPOLIA_ARBITRUM_AK = process.env.SEPOLIA_ARBITRUM_AK
+if (!SEPOLIA_ARBITRUM_AK) {
+  throw new Error("Please set your SEPOLIA_ALCHEMY_AK in a .env file")
+}
 
-const SEPOLIA_ALCHEMY_AK = process.env.SEPOLIA_ALCHEMY_AK
-// if (!SEPOLIA_ALCHEMY_AK) {
-//   throw new Error("Please set your SEPOLIA_ALCHEMY_AK in a .env file")
-// }
+const SEPOLIA_ETH_PK = process.env.SEPOLIA_ARBITRUM_PK
+if (!SEPOLIA_ETH_PK) {
+  throw new Error("Please set at least one private key in a .env file")
+}
+
+const SEPOLIA_ETH_AK = process.env.SEPOLIA_ARBITRUM_AK
+if (!SEPOLIA_ETH_AK) {
+  throw new Error("Please set your SEPOLIA_ALCHEMY_AK in a .env file")
+}
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -55,10 +61,15 @@ module.exports = {
       url: "http://127.0.0.1:8545", // 本地 Hardhat Network 的默认地址
       chainId: 31337, // 与 hardhat 网络保持一致
     },
-    // arbitrumSepolia: {
-    //   url: "https://arb-sepolia.g.alchemy.com/v2/6Bf3RM8Z7ZgQWxqox-QTqsy5fjtI2yf2",
-    //   accounts: [process.env.PRIVATE_KEY] // 你的私钥，需要在 .env 文件中存储
-    // }
+    sepolia: {
+      url: `https://eth-sepolia.g.alchemy.com/v2/${SEPOLIA_ETH_AK}`,
+      accounts: [`${SEPOLIA_ETH_PK}`],
+    },
+    arbitrumSepolia: {
+      url: `https://arb-sepolia.g.alchemy.com/v2/${SEPOLIA_ARBITRUM_AK}`,
+      accounts: [`${SEPOLIA_ARBITRUM_PK}`],
+      chainId: 421614,
+    },
   },
   gasReporter: {
     currency: "USD",
