@@ -1,22 +1,26 @@
 const { ethers, upgrades } = require("hardhat")
 
-/**  * 2025/04/07 in arbitrum sepolia testnet
+/**  
+ *  Arbitrum
+ * * 2025/04/07 in arbitrum sepolia testnet
  * Block Scan address:https://sepolia.arbiscan.io/
  * assetStorage contract deployed to: 0x6a18C66B385b6F33D3090308a926c83582C4FAEA
- * nftAuction contract deployed to: 0x82C38fF1ca69Cf0f9589dc05D2B76049034B7C95
+ * nftAuction contract deployed to: 0x82C38fF1ca69Cf0f9589dc05D2B76049034B7C95       代理地址
      nftAuction ImplementationAddress: 0x66d0Ff0405fff81508095cE1BCaf9B3A7D437526
      nftAuction AdminAddress: 0x86062B455CAf4D47d3f0393DD9336B5e8FE57a7E
-   auction contract deployed to: 0xfC5E2DE38f9f5e0A5b8992C5093b0C6F56Dd7220
+   auction contract deployed to: 0xfC5E2DE38f9f5e0A5b8992C5093b0C6F56Dd7220          代理地址
       auction ImplementationAddress: 0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18
       auction AdminAddress: 0x86062B455CAf4D47d3f0393DD9336B5e8FE57a7E
 
+
+    Ethereum
     2025/04/07 in ETH sepolia testnet
     Block Scan address:https://sepolia.arbiscan.io/
- * assetStorage contract deployed to: 0x66d0Ff0405fff81508095cE1BCaf9B3A7D437526
- * nftAuction contract deployed to: 0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18
+ * assetStorage contract deployed to: 0x66d0Ff0405fff81508095cE1BCaf9B3A7D437526       
+ * nftAuction contract deployed to: 0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18          代理地址
      nftAuction ImplementationAddress: 0xd271D45A50796D9b7b71808888E8B988534D3FA1
      nftAuction AdminAddress: 0x86062B455CAf4D47d3f0393DD9336B5e8FE57a7E
-   auction contract deployed to: 0xe3360c5Ee0f097633FCE8fAE1f2F923F483ddAEA
+   auction contract deployed to: 0xe3360c5Ee0f097633FCE8fAE1f2F923F483ddAEA             代理地址
       auction ImplementationAddress: 0xfC5E2DE38f9f5e0A5b8992C5093b0C6F56Dd7220
       auction AdminAddress: 0x86062B455CAf4D47d3f0393DD9336B5e8FE57a7E
 
