@@ -75,7 +75,7 @@ contract AssetStorage is IAssetStorage, ReentrancyGuard {
     }
 
     /**
-     * @notice 提取NFT  流拍
+     * @notice 转移NFT
      * @param nftContract 地址：NFT的合约地址
      * @param tokenId NFT的ID
        @param to 接口NFT地址

@@ -8,6 +8,7 @@ import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/Pau
 import {AccessControlUpgradeable} from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import {INFTAuction} from "./interface/INFTAuction.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
  * @title NFTAuction
@@ -24,6 +25,7 @@ OwnableUpgradeable, PausableUpgradeable, AccessControlUpgradeable,ReentrancyGuar
 
     uint256 public mintLimit; // 每个用户最多铸造的数量
     mapping(address => uint256) public userMintCount;
+    string baseURI;//nft元信息baseURI
 
     function initialize(
         uint256 _mintLimit,
@@ -54,7 +56,7 @@ OwnableUpgradeable, PausableUpgradeable, AccessControlUpgradeable,ReentrancyGuar
     function mint(address to) external nonReentrant whenNotPaused returns (uint256) {
         require(userMintCount[to] < mintLimit, "Mint limit reached");
         uint256 tokenId = _tokenIdCounter;
-        _mint(to, tokenId);
+        _safeMint(to, tokenId);
         _tokenIdCounter++;
         emit Minted(to, tokenId);
         return tokenId;
@@ -101,4 +103,12 @@ OwnableUpgradeable, PausableUpgradeable, AccessControlUpgradeable,ReentrancyGuar
     function isMinter(address account) external view returns (bool) {
         return hasRole(MINTER_ROLE, account);
     }
+    /**
+     * @notice 获取NFT元信息url
+     * @param tokenId tokenId
+     * @return string NFT元信息url
+     */
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+    return string(abi.encodePacked(baseURI, Strings.toString(tokenId), ".json"));
+}
 }

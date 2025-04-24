@@ -44,11 +44,11 @@ async function main() {
     // console.log("AssetStorage contract deployed to:", assetStorage.address);
 
     //deploy NFTAuction
-    // let nftAuction = await ethers.getContractFactory("NFTAuction")
-    // nftAuction = await upgrades.deployProxy(nftAuction,[5,"BIDC","BIDCSYMPOL"], { initializer: 'initialize' });
-    // await nftAuction.deployed()
-    // console.log("NFTAuction contract deployed to:", nftAuction.address);
-    // console.log(await upgrades.erc1967.getImplementationAddress(nftAuction.address), " nftAuction getImplementationAddress");
+    let nftAuction = await ethers.getContractFactory("NFTAuction")
+    nftAuction = await upgrades.deployProxy(nftAuction,[5,"BIDC","BIDCSYMPOL"], { initializer: 'initialize' });
+    await nftAuction.deployed()
+    console.log("NFTAuction contract deployed to:", nftAuction.address);
+    console.log(await upgrades.erc1967.getImplementationAddress(nftAuction.address), " nftAuction getImplementationAddress");
 
     //deploy Auction
     // let nftAddress="0x82C38fF1ca69Cf0f9589dc05D2B76049034B7C95";
