@@ -66,6 +66,7 @@ contract Auction is IAuction,Initializable, OwnableUpgradeable, PausableUpgradea
         // 转移NFT到AssetStorage合约进行管理
         require(IERC721(collectionAddress).ownerOf(tokenId) ==_msgSender(), "Not owner of the token");
         require(!IAssetStorage(assetStorage).isStored(tokenId), "This NFT has already been auctioned.");
+        require(collectionAddress != address(0), "Collection address can't be zero");
         IAssetStorage(assetStorage).storeAsset(collectionAddress, tokenId,_msgSender());
         auctionKey = LibAuction.hash(
             collectionAddress,

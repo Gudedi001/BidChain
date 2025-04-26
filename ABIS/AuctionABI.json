@@ -78,9 +78,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       },
       {
         "indexed": true,
@@ -97,13 +97,19 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "reservePrice",
+        "name": "startPrice",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "duration",
+        "name": "startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "endTime",
         "type": "uint256"
       },
       {
@@ -111,6 +117,18 @@
         "internalType": "enum LibAuction.AuctionType",
         "name": "auctionType",
         "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "minBidIncrement",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
       }
     ],
     "name": "AuctionCreated",
@@ -121,9 +139,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       },
       {
         "indexed": false,
@@ -146,9 +164,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       },
       {
         "indexed": true,
@@ -259,17 +277,22 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
+        "internalType": "AuctionKey",
         "name": "",
-        "type": "uint256"
+        "type": "bytes32"
       }
     ],
     "name": "auctions",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "NFTCollection",
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -283,7 +306,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "reservePrice",
+        "name": "startPrice",
         "type": "uint256"
       },
       {
@@ -312,6 +335,11 @@
         "type": "uint8"
       },
       {
+        "internalType": "uint256",
+        "name": "minBidIncrement",
+        "type": "uint256"
+      },
+      {
         "internalType": "bool",
         "name": "isActive",
         "type": "bool"
@@ -329,7 +357,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "reservePrice",
+        "name": "startPrice",
         "type": "uint256"
       },
       {
@@ -341,14 +369,24 @@
         "internalType": "enum LibAuction.AuctionType",
         "name": "auctionType",
         "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minBidIncrement",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "collectionAddress",
+        "type": "address"
       }
     ],
     "name": "createAuction",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       }
     ],
     "stateMutability": "nonpayable",
@@ -400,9 +438,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       }
     ],
     "name": "endAuction",
@@ -413,9 +451,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       }
     ],
     "name": "getAuctionDetails",
@@ -423,9 +461,14 @@
       {
         "components": [
           {
-            "internalType": "uint256",
-            "name": "auctionId",
-            "type": "uint256"
+            "internalType": "AuctionKey",
+            "name": "auctionKey",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "NFTCollection",
+            "type": "address"
           },
           {
             "internalType": "uint256",
@@ -439,7 +482,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "reservePrice",
+            "name": "startPrice",
             "type": "uint256"
           },
           {
@@ -466,6 +509,11 @@
             "internalType": "enum LibAuction.AuctionType",
             "name": "auctionType",
             "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minBidIncrement",
+            "type": "uint256"
           },
           {
             "internalType": "bool",
@@ -541,9 +589,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "auctionId",
-        "type": "uint256"
+        "internalType": "AuctionKey",
+        "name": "auctionKey",
+        "type": "bytes32"
       },
       {
         "internalType": "uint256",
