@@ -6,7 +6,7 @@ const { ethers, upgrades } = require("hardhat");
 async function main() {
   // 代理合约地址（从之前的部署日志获取）
   const nftAuctionProxyAddress = "0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18"; 
-  const auctionProxyAddress = "0xe3360c5Ee0f097633FCE8fAE1f2F923F483ddAEA";
+  const auctionProxyAddress = "0x30BfE8Fb4a93923ba3BC22552cfe5259fAe8044D";
   // 测试代理合约
 //   const nftAuctionProxyAddress = "0x2Ac3d1FED9531A7d384eD41bb1bd4a12563c1f18"; 
 //   const auctionProxyAddress = "0xe3360c5Ee0f097633FCE8fAE1f2F923F483ddAEA";

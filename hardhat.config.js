@@ -36,7 +36,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 50,
+        runs: 200,
       },
       viaIR: true,
     },
@@ -63,7 +63,12 @@ module.exports = {
     },
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${SEPOLIA_ETH_AK}`,
-      accounts: [`${SEPOLIA_ETH_PK}`],
+      accounts: [
+        `${SEPOLIA_ETH_PK}`,
+        `${process.env.SEPOLIA_ETH_PK_MINTER}`,
+        `${process.env.SEPOLIA_ETH_PK_BIDDER}`,
+        `${process.env.SEPOLIA_ETH_PK_ADDR}`
+      ],
     },
     arbitrumSepolia: {
       url: `https://arb-sepolia.g.alchemy.com/v2/${SEPOLIA_ARBITRUM_AK}`,
@@ -73,7 +78,7 @@ module.exports = {
   },
   gasReporter: {
     currency: "USD",
-    enabled: process.env.REPORT_GAS ? true : false,
+    enabled: true,
     excludeContracts: [],
     src: "./contracts",
   },

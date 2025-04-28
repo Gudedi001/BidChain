@@ -108,7 +108,10 @@ describe("BidChain Test", function () {
 
        // 授权 AssetStorage 合约转移 NFT
        await nftAuction.connect(minter).approve(assetStorage.address, tokenId);
-
+       const collection = await ethers.getContractAt("IERC721", nftAuction.address);
+       const approved = await collection.getApproved(0);
+       console.log("Approved for tokenId 0:", approved);
+       console.log("AssetStorage address:",assetStorage.address)
        let tx2 = await auction.connect(minter).createAuction(tokenId, reservePrice, duration, AuctionType.Dutch,ethers.utils.parseEther("1"),nftAuction.address); // 0 for auctionType
        const receipt2 = await tx2.wait();
 

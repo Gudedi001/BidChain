@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {IERC721} from "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import {IAssetStorage} from "./interface/IAssetStorage.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {LibTransferSafeUpgradeable, IERC721} from "./libraries/LibTransferSafeUpgradeable.sol";
 
 contract AssetStorage is IAssetStorage, ReentrancyGuard {
+    // using LibTransferSafeUpgradeable for address;
+    // using LibTransferSafeUpgradeable for IERC721;
     // 资产存储账户
     mapping(address => uint256) private _balances;
     // 记录NFT的存储情况，存储地址 -> NFT ID -> 是否存储
@@ -56,7 +58,7 @@ contract AssetStorage is IAssetStorage, ReentrancyGuard {
      * @param tokenId NFT的ID
      */
     function storeAsset(address nftContract, uint256 tokenId,address owner) external {
-        require(IERC721(nftContract).ownerOf(tokenId) == owner, "Only the owner can store the NFT");
+        // IERC721(nftContract).safeTransferNFT(owner, address(this), tokenId);
         IERC721(nftContract).transferFrom(owner, address(this), tokenId);
         _storedAssets[address(this)][tokenId] = true;
         emit AssetStored(address(this), tokenId);

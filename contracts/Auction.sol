@@ -65,7 +65,6 @@ contract Auction is IAuction,Initializable, OwnableUpgradeable, PausableUpgradea
     ) external nonReentrant returns (AuctionKey auctionKey) {
         // 转移NFT到AssetStorage合约进行管理
         require(IERC721(collectionAddress).ownerOf(tokenId) ==_msgSender(), "Not owner of the token");
-        require(!IAssetStorage(assetStorage).isStored(tokenId), "This NFT has already been auctioned.");
         require(collectionAddress != address(0), "Collection address can't be zero");
         IAssetStorage(assetStorage).storeAsset(collectionAddress, tokenId,_msgSender());
         auctionKey = LibAuction.hash(
@@ -78,17 +77,22 @@ contract Auction is IAuction,Initializable, OwnableUpgradeable, PausableUpgradea
             auctionType,
             minBidIncrement
         );
-        LibAuction.AuctionDetails storage auction = auctions[auctionKey];
-        auction.auctionKey = auctionKey;
-        auction.tokenId = tokenId;
-        auction.NFTCollection = collectionAddress;
-        auction.seller = msg.sender;
-        auction.startPrice = startPrice;
-        auction.startTime = block.timestamp;
-        auction.endTime = block.timestamp + duration;
-        auction.auctionType = auctionType;
-        auction.minBidIncrement = minBidIncrement;
-        auction.isActive = true;
+        LibAuction.AuctionDetails memory auction = LibAuction.AuctionDetails({
+        auctionKey: auctionKey,
+        tokenId: tokenId,
+        NFTCollection: collectionAddress,
+        seller: msg.sender,
+        startPrice: startPrice,
+        startTime: block.timestamp,
+        endTime: block.timestamp + duration,
+        highestBid: 0,
+        highestBidder: address(0),
+        auctionType: auctionType,
+        minBidIncrement: minBidIncrement,
+        isActive: true
+        });
+
+        auctions[auctionKey] = auction;
 
         emit AuctionCreated(auctionKey, tokenId, msg.sender, startPrice, auction.startTime,auction.endTime,auctionType,minBidIncrement,collectionAddress);
     }
